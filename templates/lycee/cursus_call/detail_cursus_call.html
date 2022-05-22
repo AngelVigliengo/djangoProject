@@ -1,0 +1,36 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% if liste %}
+  {% block title %}
+    Call of roll
+  {% endblock %}
+
+  {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5">
+              <form method="POST">
+              {% csrf_token %}
+                  <label for="date">Start date:</label>
+                  <input type="date" id="date" name="date_cursus_call"
+                      value="2022-01-01">
+                    <br>
+                  {% for key,values in liste.items%}
+                    <label for="student">
+                        <input type="checkbox" id="{{key}}" name="missing" value="{{key}}">
+                    </label>
+                  {{values}}
+                      <br>
+                  {% endfor %}
+                  <button type="submit">
+                    Submit
+                  </button>
+              </form>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% else %}
+  <p>No student to show.</p>
+{% endif %}
